@@ -25,11 +25,10 @@ class BookCoordinator: Coodinator {
         self.navigationController.pushViewController(viewController, animated: true)
     }
     
-    func startBookDetail(book: Item) {
+    func startBookDetail() {
         let nameVC = String(describing: BookDetailViewController.self)
         let bundleVC = Bundle(for: BookDetailViewController.self)
         let viewController = BookDetailViewController.init(nibName: nameVC, bundle: bundleVC)
-        viewController.book = book
         self.navigationController.pushViewController(viewController, animated: true)
     }
 }

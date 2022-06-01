@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6224D251284908D700F162B5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6224D250284908D700F162B5 /* BaseViewController.swift */; };
 		622516FB2847D5D80015E0DD /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622516FA2847D5D80015E0DD /* UIImageView+Extension.swift */; };
 		622516FE2847E62E0015E0DD /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 622516FD2847E62E0015E0DD /* NVActivityIndicatorView */; };
 		622517002847E62E0015E0DD /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 622516FF2847E62E0015E0DD /* NVActivityIndicatorViewExtended */; };
@@ -51,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6224D250284908D700F162B5 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		622516FA2847D5D80015E0DD /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		622517062847F4250015E0DD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6225170A2847F97D0015E0DD /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
@@ -106,14 +104,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6224D24F284908CA00F162B5 /* BaseViewController */ = {
-			isa = PBXGroup;
-			children = (
-				6224D250284908D700F162B5 /* BaseViewController.swift */,
-			);
-			path = BaseViewController;
-			sourceTree = "<group>";
-		};
 		622516F92847D4C50015E0DD /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +212,6 @@
 		629381992847BBA90042796B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6224D24F284908CA00F162B5 /* BaseViewController */,
 				622517092847F96D0015E0DD /* BookDetail */,
 				622517082847F9640015E0DD /* BookList */,
 				622517012847F3840015E0DD /* LoadingScreen */,
@@ -407,7 +396,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6224D251284908D700F162B5 /* BaseViewController.swift in Sources */,
 				629381AC2847C2170042796B /* BookStoreServices.swift in Sources */,
 				629381A02847BC030042796B /* BookListViewController.swift in Sources */,
 				622516FB2847D5D80015E0DD /* UIImageView+Extension.swift in Sources */,
@@ -597,7 +585,6 @@
 				INFOPLIST_FILE = BookStore_Gustavo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -629,7 +616,6 @@
 				INFOPLIST_FILE = BookStore_Gustavo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

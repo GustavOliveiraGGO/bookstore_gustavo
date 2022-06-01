@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookListViewController: BaseViewController {
+class BookListViewController: UIViewController {
 
     private var bookStore: BookStore?
     private var books: [Item]?
@@ -17,8 +17,6 @@ class BookListViewController: BaseViewController {
     private var canLoadMore = true
     private lazy var load = LoadingView()
     private var coodinator: BookCoordinator?
-    private var supportBookList: [Item]?
-    private var isFavSelected: Bool = false
         
     @IBOutlet weak var bookCollectionView: UICollectionView! {
         didSet {
@@ -43,19 +41,14 @@ class BookListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel.delegate = self
+        setup()
         DispatchQueue.main.async {
-            self.setup()
             self.fetchBookStore()
         }
     }
 
     private func setup() {
-        let favItem = UIBarButtonItem(
-            barButtonSystemItem: .bookmarks,
-            target: self,
-            action: #selector(self.favBooks)
-        )
-        self.setupNavBar(title: "Book Store - iOS", navBar: self.navBar, navBarItem: favItem)
+        self.setupNavBar()
         self.load.setup()
         load.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(load)
@@ -65,7 +58,20 @@ class BookListViewController: BaseViewController {
             load.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             load.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
+        
         self.coodinator = BookCoordinator(navigationController: self.navigationController ?? UINavigationController())
+    }
+    
+    private func setupNavBar() {
+        let navItem = UINavigationItem(title: "Book Store - iOS")
+        let favItem = UIBarButtonItem(
+            barButtonSystemItem: .bookmarks,
+            target: self,
+            action: #selector(self.favBooks)
+        )
+        navItem.rightBarButtonItem = favItem
+
+        navBar.setItems([navItem], animated: false)
     }
     
     private func fetchBookStore() {
@@ -87,35 +93,8 @@ class BookListViewController: BaseViewController {
         }
     }
     
-    private func showErrorAlert() {
-        let alert = UIAlertController(title: "Atenção", message: "Não foi possível carregar os livros de iOS. Deseja tentar novamente?", preferredStyle: .alert)
-        let yesButton =  UIAlertAction(title: "Sim", style: .default) { action in
-            self.fetchBookStore()
-        }
-        let noButton =  UIAlertAction(title: "Não", style: .default, handler: nil)
-        alert.addAction(yesButton)
-        alert.addAction(noButton)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @objc func favBooks() {
-        let favorites = viewModel.getFavorites()
-        self.books?.removeAll()
-        if self.isFavSelected {
-            self.books = supportBookList
-        } else {
-            guard let supportBookList = supportBookList else { return }
-            for currentBook in supportBookList {
-                guard let id = currentBook.id else { return }
-                if favorites.contains(id) {
-                    self.books?.append(currentBook)
-                }
-            }
-        }
-        self.isFavSelected = !isFavSelected
-        DispatchQueue.main.async {
-            self.bookCollectionView.reloadData()
-        }
+        debugPrint("hi")
     }
 }
 
@@ -157,8 +136,9 @@ extension BookListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let books = self.books else { return }
+        debugPrint(books[indexPath.row])
         DispatchQueue.main.async {
-            self.coodinator?.startBookDetail(book: books[indexPath.row])
+            self.coodinator?.startBookDetail()
         }
     }
 }
@@ -173,7 +153,7 @@ extension BookListViewController: FetchBookStore {
             self.bookStore = bookStore
             self.books = bookStore.items
         }
-        self.supportBookList = self.books ?? [Item]()
+        
         DispatchQueue.main.async {
             self.bookCollectionView.reloadData()
         }
@@ -182,7 +162,6 @@ extension BookListViewController: FetchBookStore {
     func didntFetch(error: Error?) {
         stopLoad()
         self.canLoadMore = true
-        self.showErrorAlert()
     }
 }
 
