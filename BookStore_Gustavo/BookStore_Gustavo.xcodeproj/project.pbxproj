@@ -11,6 +11,10 @@
 		622516FE2847E62E0015E0DD /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 622516FD2847E62E0015E0DD /* NVActivityIndicatorView */; };
 		622517002847E62E0015E0DD /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 622516FF2847E62E0015E0DD /* NVActivityIndicatorViewExtended */; };
 		622517072847F4250015E0DD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622517062847F4250015E0DD /* LoadingView.swift */; };
+		6225170C2847F97D0015E0DD /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225170A2847F97D0015E0DD /* BookDetailViewController.swift */; };
+		6225170D2847F97D0015E0DD /* BookDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6225170B2847F97D0015E0DD /* BookDetailViewController.xib */; };
+		6225170F2847F9E00015E0DD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6225170E2847F9E00015E0DD /* Coordinator.swift */; };
+		622517122847FA590015E0DD /* BookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622517112847FA590015E0DD /* BookCoordinator.swift */; };
 		629381662847BA580042796B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629381652847BA580042796B /* AppDelegate.swift */; };
 		629381682847BA580042796B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 629381672847BA580042796B /* SceneDelegate.swift */; };
 		6293816F2847BA590042796B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6293816E2847BA590042796B /* Assets.xcassets */; };
@@ -48,6 +52,10 @@
 /* Begin PBXFileReference section */
 		622516FA2847D5D80015E0DD /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		622517062847F4250015E0DD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		6225170A2847F97D0015E0DD /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		6225170B2847F97D0015E0DD /* BookDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookDetailViewController.xib; sourceTree = "<group>"; };
+		6225170E2847F9E00015E0DD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		622517112847FA590015E0DD /* BookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoordinator.swift; sourceTree = "<group>"; };
 		629381622847BA580042796B /* BookStore_Gustavo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookStore_Gustavo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		629381652847BA580042796B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		629381672847BA580042796B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +118,32 @@
 				622517062847F4250015E0DD /* LoadingView.swift */,
 			);
 			path = LoadingScreen;
+			sourceTree = "<group>";
+		};
+		622517082847F9640015E0DD /* BookList */ = {
+			isa = PBXGroup;
+			children = (
+				6293819E2847BC030042796B /* BookListViewController.swift */,
+				6293819F2847BC030042796B /* BookListViewController.xib */,
+			);
+			path = BookList;
+			sourceTree = "<group>";
+		};
+		622517092847F96D0015E0DD /* BookDetail */ = {
+			isa = PBXGroup;
+			children = (
+				6225170A2847F97D0015E0DD /* BookDetailViewController.swift */,
+				6225170B2847F97D0015E0DD /* BookDetailViewController.xib */,
+			);
+			path = BookDetail;
+			sourceTree = "<group>";
+		};
+		622517102847FA4D0015E0DD /* BookCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				622517112847FA590015E0DD /* BookCoordinator.swift */,
+			);
+			path = BookCoordinator;
 			sourceTree = "<group>";
 		};
 		629381592847BA580042796B = {
@@ -178,10 +212,10 @@
 		629381992847BBA90042796B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				622517092847F96D0015E0DD /* BookDetail */,
+				622517082847F9640015E0DD /* BookList */,
 				622517012847F3840015E0DD /* LoadingScreen */,
 				629381B02847D2020042796B /* CollectionViewCell */,
-				6293819E2847BC030042796B /* BookListViewController.swift */,
-				6293819F2847BC030042796B /* BookListViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +231,8 @@
 		629381AA2847C2030042796B /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				622517102847FA4D0015E0DD /* BookCoordinator */,
+				6225170E2847F9E00015E0DD /* Coordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -331,6 +367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6225170D2847F97D0015E0DD /* BookDetailViewController.xib in Resources */,
 				629381722847BA590042796B /* LaunchScreen.storyboard in Resources */,
 				629381B42847D21C0042796B /* BookCollectionViewCell.xib in Resources */,
 				629381A12847BC030042796B /* BookListViewController.xib in Resources */,
@@ -362,8 +399,11 @@
 				629381AC2847C2170042796B /* BookStoreServices.swift in Sources */,
 				629381A02847BC030042796B /* BookListViewController.swift in Sources */,
 				622516FB2847D5D80015E0DD /* UIImageView+Extension.swift in Sources */,
+				622517122847FA590015E0DD /* BookCoordinator.swift in Sources */,
 				622517072847F4250015E0DD /* LoadingView.swift in Sources */,
+				6225170C2847F97D0015E0DD /* BookDetailViewController.swift in Sources */,
 				629381B32847D21C0042796B /* BookCollectionViewCell.swift in Sources */,
+				6225170F2847F9E00015E0DD /* Coordinator.swift in Sources */,
 				629381A92847C1A90042796B /* BookStore.swift in Sources */,
 				629381662847BA580042796B /* AppDelegate.swift in Sources */,
 				629381682847BA580042796B /* SceneDelegate.swift in Sources */,

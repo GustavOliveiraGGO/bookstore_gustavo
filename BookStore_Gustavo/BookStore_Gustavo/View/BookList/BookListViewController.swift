@@ -16,6 +16,7 @@ class BookListViewController: UIViewController {
     private var currentStart = 0
     private var canLoadMore = true
     private lazy var load = LoadingView()
+    private var coodinator: BookCoordinator?
         
     @IBOutlet weak var bookCollectionView: UICollectionView! {
         didSet {
@@ -57,6 +58,8 @@ class BookListViewController: UIViewController {
             load.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             load.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
+        
+        self.coodinator = BookCoordinator(navigationController: self.navigationController ?? UINavigationController())
     }
     
     private func setupNavBar() {
@@ -91,7 +94,7 @@ class BookListViewController: UIViewController {
     }
     
     @objc func favBooks() {
-        
+        debugPrint("hi")
     }
 }
 
@@ -112,7 +115,6 @@ extension BookListViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let books = self.books else { return 0 }
-        debugPrint(books.count)
         return books.count
     }
     
@@ -130,6 +132,14 @@ extension BookListViewController: UICollectionViewDataSource {
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let books = self.books else { return }
+        debugPrint(books[indexPath.row])
+        DispatchQueue.main.async {
+            self.coodinator?.startBookDetail()
+        }
     }
 }
 

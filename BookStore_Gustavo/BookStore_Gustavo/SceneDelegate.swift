@@ -15,11 +15,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
             
-            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-            window?.windowScene = windowScene
-            window?.makeKeyAndVisible()
-            let vc = BookListViewController()
-            window?.rootViewController = vc
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.makeKeyAndVisible()
+        let vc = BookListViewController()
+        let navigation = UINavigationController()
+        navigation.pushViewController(vc, animated: true)
+        window?.rootViewController = navigation
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
