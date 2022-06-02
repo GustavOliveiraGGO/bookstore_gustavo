@@ -17,6 +17,8 @@ class BookListViewController: UIViewController {
     private var canLoadMore = true
     private lazy var load = LoadingView()
     private var coodinator: BookCoordinator?
+    private var supportBookList = [Item]()
+    private var isFavSelected: Bool = false
         
     @IBOutlet weak var bookCollectionView: UICollectionView! {
         didSet {
@@ -94,7 +96,23 @@ class BookListViewController: UIViewController {
     }
     
     @objc func favBooks() {
-        debugPrint("hi")
+        let defaults = UserDefaults.standard
+        let favorites = defaults.array(forKey: "FavoritesBooks")  as? [String] ?? [String]()
+        self.books?.removeAll()
+        if self.isFavSelected {
+            self.books = supportBookList
+        } else {
+            for currentBook in supportBookList {
+                guard let id = currentBook.id else { return }
+                if favorites.contains(id) {
+                    self.books?.append(currentBook)
+                }
+            }
+        }
+        self.isFavSelected = !isFavSelected
+        DispatchQueue.main.async {
+            self.bookCollectionView.reloadData()
+        }
     }
 }
 
@@ -136,9 +154,8 @@ extension BookListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let books = self.books else { return }
-        debugPrint(books[indexPath.row])
         DispatchQueue.main.async {
-            self.coodinator?.startBookDetail()
+            self.coodinator?.startBookDetail(book: books[indexPath.row])
         }
     }
 }
@@ -153,7 +170,7 @@ extension BookListViewController: FetchBookStore {
             self.bookStore = bookStore
             self.books = bookStore.items
         }
-        
+        self.supportBookList = self.books ?? [Item]()
         DispatchQueue.main.async {
             self.bookCollectionView.reloadData()
         }

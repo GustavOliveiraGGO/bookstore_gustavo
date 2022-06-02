@@ -44,6 +44,28 @@ struct Epub: Codable {
 struct SaleInfo: Codable {
     let country, saleability: String?
     let isEbook: Bool?
+    let listPrice, retailPrice: SaleInfoListPrice?
+    let buyLink: String?
+    let offers: [Offer]?
+}
+
+// MARK: - SaleInfoListPrice
+struct SaleInfoListPrice: Codable {
+    let amount: Double
+    let currencyCode: String
+}
+
+// MARK: - Offer
+struct Offer: Codable {
+    let finskyOfferType: Int?
+    let listPrice, retailPrice: OfferListPrice?
+    let giftable: Bool?
+}
+
+// MARK: - OfferListPrice
+struct OfferListPrice: Codable {
+    let amountInMicros: Int?
+    let currencyCode: String?
 }
 
 // MARK: - SearchInfo
