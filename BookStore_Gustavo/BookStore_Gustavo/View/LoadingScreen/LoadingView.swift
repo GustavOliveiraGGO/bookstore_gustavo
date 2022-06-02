@@ -13,7 +13,6 @@ class LoadingView: UIView {
     private var activityIndicator = NVActivityIndicatorView(frame: .zero, type: .circleStrokeSpin, color: .darkText, padding: 0)
     
     func setup() {
-        
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(activityIndicator)
         NSLayoutConstraint.activate([

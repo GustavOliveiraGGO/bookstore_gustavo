@@ -25,7 +25,6 @@ class BookStoreServices {
                    method: .get,
                    parameters: params,
                    encoding: URLEncoding.default).response { response in
-            debugPrint(response.request)
             let decoder = JSONDecoder()
             if let data = response.data {
                 do {

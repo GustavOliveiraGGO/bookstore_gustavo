@@ -10,6 +10,8 @@ import XCTest
 
 class BookStore_GustavoTests: XCTestCase {
 
+    private let favoriteKey = "FavoritesBooksTest"
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -18,16 +20,41 @@ class BookStore_GustavoTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGetFavoriteEmptyList() throws {
+        let defaults = UserDefaults.standard
+        let emptyList = defaults.array(forKey: favoriteKey) as? [String] ?? [String]()
+        XCTAssertNotNil(emptyList)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testSetFavorite() throws {
+        let defaults = UserDefaults.standard
+        let favorites = ["1", "23", "456"]
+        defaults.set(favorites, forKey: favoriteKey)
+        defaults.synchronize()
+        let notEmptyList = defaults.array(forKey: favoriteKey) as? [String] ?? [String]()
+        XCTAssertNotNil(notEmptyList)
+        XCTAssertEqual(notEmptyList.count, 3)
     }
-
+    
+    func testRemoveFavorite() throws {
+        let defaults = UserDefaults.standard
+        let favorites = ["1", "23", "456"]
+        let id = "23"
+        let newFavorites = favorites.filter { $0 != id }
+        defaults.set(newFavorites, forKey: favoriteKey)
+        defaults.synchronize()
+        let notEmptyList = defaults.array(forKey: favoriteKey) as? [String] ?? [String]()
+        XCTAssertNotNil(notEmptyList)
+        XCTAssertEqual(notEmptyList.count, 2)
+    }
+    
+    func testRemoveAllFavorite() throws {
+        let defaults = UserDefaults.standard
+        let favorites: [String] = []
+        defaults.set(favorites, forKey: favoriteKey)
+        defaults.synchronize()
+        let notEmptyList = defaults.array(forKey: favoriteKey) as? [String] ?? [String]()
+        XCTAssertNotNil(notEmptyList)
+        XCTAssertEqual(notEmptyList.count, 0)
+    }
 }

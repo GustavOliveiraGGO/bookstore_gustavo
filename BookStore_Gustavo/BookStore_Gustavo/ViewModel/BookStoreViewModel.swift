@@ -15,6 +15,7 @@ protocol FetchBookStore: class {
 class BookStoreViewModel {
     
     weak var delegate: FetchBookStore?
+    private var favoritekey = "FavoritesBooks"
     
     func fetchBooks(maxResults: String, startIndex: String) {
         BookStoreServices.makeRequest(maxResults: maxResults, startIndex: startIndex) {  bookStore, error in
@@ -28,5 +29,23 @@ class BookStoreViewModel {
                 delegate.didntFetch(error: error)
             }
         }
+    }
+    
+    func setFavorites(id: String) {
+        let defaults = UserDefaults.standard
+        var favorites = getFavorites()
+        if favorites.contains(id) {
+            let newFavorites = favorites.filter { $0 != id }
+            defaults.set(newFavorites, forKey: favoritekey)
+        } else {
+            favorites.append(id)
+            defaults.set(favorites, forKey: favoritekey)
+        }
+        defaults.synchronize()
+    }
+    
+    func getFavorites() -> [String] {
+        let defaults = UserDefaults.standard
+        return defaults.array(forKey: favoritekey)  as? [String] ?? [String]()
     }
 }
