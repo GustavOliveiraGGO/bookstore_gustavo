@@ -17,7 +17,7 @@ class BookListViewController: BaseViewController {
     private var canLoadMore = true
     private lazy var load = LoadingView()
     private var coodinator: BookCoordinator?
-    private var supportBookList = [Item]()
+    private var supportBookList: [Item]?
     private var isFavSelected: Bool = false
         
     @IBOutlet weak var bookCollectionView: UICollectionView! {
@@ -87,13 +87,24 @@ class BookListViewController: BaseViewController {
         }
     }
     
+    private func showErrorAlert() {
+        let alert = UIAlertController(title: "Atenção", message: "Não foi possível carregar os livros de iOS. Deseja tentar novamente?", preferredStyle: .alert)
+        let yesButton =  UIAlertAction(title: "Sim", style: .default) { action in
+            self.fetchBookStore()
+        }
+        let noButton =  UIAlertAction(title: "Não", style: .default, handler: nil)
+        alert.addAction(yesButton)
+        alert.addAction(noButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func favBooks() {
-        let defaults = UserDefaults.standard
-        let favorites = defaults.array(forKey: "FavoritesBooks")  as? [String] ?? [String]()
+        let favorites = viewModel.getFavorites()
         self.books?.removeAll()
         if self.isFavSelected {
             self.books = supportBookList
         } else {
+            guard let supportBookList = supportBookList else { return }
             for currentBook in supportBookList {
                 guard let id = currentBook.id else { return }
                 if favorites.contains(id) {
@@ -171,6 +182,7 @@ extension BookListViewController: FetchBookStore {
     func didntFetch(error: Error?) {
         stopLoad()
         self.canLoadMore = true
+        self.showErrorAlert()
     }
 }
 

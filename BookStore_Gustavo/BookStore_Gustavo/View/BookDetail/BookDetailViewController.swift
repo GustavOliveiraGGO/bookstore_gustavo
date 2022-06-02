@@ -11,6 +11,7 @@ import SafariServices
 class BookDetailViewController: BaseViewController {
 
     var book: Item?
+    private let viewModel = BookStoreViewModel()
     
     @IBOutlet weak var bookThumb: UIImageView!
     
@@ -90,17 +91,7 @@ class BookDetailViewController: BaseViewController {
     
     @IBAction func setFavorite(_ sender: Any) {
         guard let book = book, let id = book.id else { return }
-        let defaults = UserDefaults.standard
-        var favorites = getFavorites()
-        if favorites.contains(id) {
-            let newFavorites = favorites.filter { $0 != id }
-            defaults.set(newFavorites, forKey: "FavoritesBooks")
-        } else {
-            favorites.append(id)
-            defaults.set(favorites, forKey: "FavoritesBooks")
-            
-        }
-        defaults.synchronize()
+        viewModel.setFavorites(id: id)
         changeHeartIcon()
     }
     
