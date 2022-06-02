@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class BookDetailViewController: UIViewController {
+class BookDetailViewController: BaseViewController {
 
     var book: Item?
     
@@ -47,20 +47,28 @@ class BookDetailViewController: UIViewController {
     
     @IBOutlet weak var buyButton: UIButton! {
         didSet {
-            buyButton.backgroundColor = .blue
+            buyButton.backgroundColor = .white
             buyButton.layer.cornerRadius = 6
             buyButton.setTitleColor(.black, for: .normal)
             buyButton.isHidden = true
+            buyButton.setTitle("Comprar", for: .normal)
+            buyButton.layer.borderWidth = 1
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        guard let nav = self.navigationController else { return }
+        setupNavBar(title: "Detalhes", navBar: nav.navigationBar, navBarItem: nil)
+    }
+    
+    override func setupNavBar(title: String, navBar: UINavigationBar, navBarItem: UIBarButtonItem?) {
+        self.navigationItem.title = title
     }
     
     private func setup() {
-        guard let book = book, let id = book.id, let volumeInfo = book.volumeInfo, let authors = volumeInfo.authors, let imageLinks = volumeInfo.imageLinks, let thumb = imageLinks.thumbnail else { return }
+        guard let book = book, let volumeInfo = book.volumeInfo, let authors = volumeInfo.authors, let imageLinks = volumeInfo.imageLinks, let thumb = imageLinks.thumbnail else { return }
         self.bookTitle.text = volumeInfo.title
         self.bookAuthor.text = authors[0]
         self.bookDescription.text = volumeInfo.volumeInfoDescription
