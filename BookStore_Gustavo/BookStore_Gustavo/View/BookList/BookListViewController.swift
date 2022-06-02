@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookListViewController: UIViewController {
+class BookListViewController: BaseViewController {
 
     private var bookStore: BookStore?
     private var books: [Item]?
@@ -43,14 +43,19 @@ class BookListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel.delegate = self
-        setup()
         DispatchQueue.main.async {
+            self.setup()
             self.fetchBookStore()
         }
     }
 
     private func setup() {
-        self.setupNavBar()
+        let favItem = UIBarButtonItem(
+            barButtonSystemItem: .bookmarks,
+            target: self,
+            action: #selector(self.favBooks)
+        )
+        self.setupNavBar(title: "Book Store - iOS", navBar: self.navBar, navBarItem: favItem)
         self.load.setup()
         load.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(load)
@@ -60,20 +65,7 @@ class BookListViewController: UIViewController {
             load.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             load.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
-        
         self.coodinator = BookCoordinator(navigationController: self.navigationController ?? UINavigationController())
-    }
-    
-    private func setupNavBar() {
-        let navItem = UINavigationItem(title: "Book Store - iOS")
-        let favItem = UIBarButtonItem(
-            barButtonSystemItem: .bookmarks,
-            target: self,
-            action: #selector(self.favBooks)
-        )
-        navItem.rightBarButtonItem = favItem
-
-        navBar.setItems([navItem], animated: false)
     }
     
     private func fetchBookStore() {
